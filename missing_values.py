@@ -18,7 +18,6 @@ def analyze(df: pd.DataFrame) -> Tuple[pd.Series, pd.Series]:
     visualize_missing_values(df)
     return identify_missing_values(df)
 
-
 def identify_missing_values(df: pd.DataFrame) -> Tuple[pd.Series, pd.Series]:
     """
     Wypisuje sumę braków danych dla każdego atrybutu i obiektu w ramce danych
@@ -34,16 +33,18 @@ def identify_missing_values(df: pd.DataFrame) -> Tuple[pd.Series, pd.Series]:
     """
     missing_attributes = df.isnull().sum()
     missing_attributes_filtred = missing_attributes[missing_attributes > 0]
-    if missing_attributes_filtred:
+    
+    if not missing_attributes_filtred.empty:
         print("\nBraki w danych liczone wg. atrybutów")
         print(missing_attributes_filtred)
     else:
         print("\nBrak braków w danych liczonych wg. atrybutów")
 
     print("\nBraki w danych liczone wg. obiektów")
-    missing_objects = df.isnull().sum(axis = 1)
+    missing_objects = df.isnull().sum(axis=1)
     missing_objects_filtred = missing_objects[missing_objects > 0]
-    if missing_objects_filtred:
+    
+    if not missing_objects_filtred.empty:
         print("\nBraki w danych liczone wg. obiektów")
         print(missing_objects_filtred)
     else:
