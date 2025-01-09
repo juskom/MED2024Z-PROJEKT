@@ -3,13 +3,13 @@ import seaborn as sns
 from numpy import arange, log, float64, int64
 import matplotlib.pyplot as plt
 from scipy.stats import shapiro
-from scipy.stats import normaltest, kstest, shapiro
 
-def to_normal(df: pd.DataFrame, attr: str) -> None:
+def to_normal(df: pd.DataFrame, attr: str) -> pd.DataFrame:
     """
     Wyświetla histogramy, przed i po wykonaniu transformacji logarytmicznej. 
     Uwaga: jeżeli nie udało się dobrać podstawy przybliżającej rozkład do normalnego,
-    wyświetlany jest tylko wykres przed transformacją.
+    wyświetlany jest tylko wykres przed transformacją. Jeżeli udało dobrać się podstawę
+    przybliżającą rozkład do normalnego, dodawany jest przetransformowany atrybut.
 
     Uwaga: dane będące liczbami zmiennoprzecinkowymi podlegają dodaniu o 0.1, aby uniknąć
     logarytmowania zera. Podobnie do danych całkowitoliczbowych dodawane jest 1. 
@@ -22,7 +22,7 @@ def to_normal(df: pd.DataFrame, attr: str) -> None:
     attr (str): nazwa atrybutu, który ma podlegać transformacji
 
     Zwraca:
-    None
+    df (pd.DataFrame): Ramkę danych z dodanymi zlogarytmowanymi atrybutami.
     Wyświetla histogramy.
     """
 
@@ -61,3 +61,5 @@ def to_normal(df: pd.DataFrame, attr: str) -> None:
 
     plt.tight_layout()
     plt.show()
+
+    return df
