@@ -4,8 +4,7 @@ from sklearn.model_selection import cross_validate
 import numpy as np
 import pandas as pd
 
-def find_best_features(df: pd.DataFrame, dec_attr: str, is_standarized = False, std_dev = 0, is_normalized = False, range=0) -> None:
-    lr = LinearRegression()
+def find_best_features(df: pd.DataFrame, dec_attr: str, is_standarized = False, std_dev = 0, is_normalized = False, range_minmax=0) -> None:
     features = df.columns.to_list()
     features.remove(dec_attr)
     n = len(features)
@@ -38,4 +37,4 @@ def find_best_features(df: pd.DataFrame, dec_attr: str, is_standarized = False, 
         print(best_features, min_error * (std_dev ** 2))
     elif is_normalized:
         print("Po przeliczeniu błędu w porównaniu do danych bez przeskalowania:")
-        print(best_features, min_error * (range ** 2))
+        print(best_features, min_error * (range_minmax ** 2))
