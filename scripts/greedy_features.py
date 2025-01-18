@@ -27,7 +27,7 @@ def find_best_features(df: pd.DataFrame, dec_attr: str, is_standarized = False, 
         print()
         if errors[idx] < min_error:
             min_error = errors[idx]
-            best_features = tmp_features
+            best_features = tmp_features[:idx]
 
     print("Najmniejszy błąd otrzymujemy dla następującej pary atrybutów:")
     print(best_features, min_error)
