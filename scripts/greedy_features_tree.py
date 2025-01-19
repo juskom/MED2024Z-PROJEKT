@@ -1,4 +1,4 @@
-from sklearn.linear_model import LinearRegression
+from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import cross_validate
 import numpy as np
 import pandas as pd
@@ -16,7 +16,7 @@ def find_best_features(df: pd.DataFrame, dec_attr: str, is_standarized = False, 
         errors = [0] * (n-j)
         for i, value in enumerate(features):
             tmp_features.append(value)
-            result = cross_validate(LinearRegression(), df[tmp_features].values, df[dec_attr].values, cv = 5, scoring = 'neg_mean_squared_error')
+            result = cross_validate(DecisionTreeRegressor(), df[tmp_features].values, df[dec_attr].values, cv = 5, scoring = 'neg_mean_squared_error')
             errors[i] = np.mean(-result['test_score'])
             tmp_features.remove(value)
         idx = np.argmin(errors)
