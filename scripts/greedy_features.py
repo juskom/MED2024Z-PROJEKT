@@ -28,10 +28,3 @@ def find_best_features(df: pd.DataFrame, dec_attr: str, is_standarized = False, 
             min_error = errors[idx]
 
     print("Najmniejszy błąd:", min_error)
-
-    if is_standarized:
-        print("Po przeliczeniu błędu w porównaniu do danych bez przeskalowania:")
-        print(best_features, min_error * (std_dev ** 2))
-    elif is_normalized:
-        print("Po przeliczeniu błędu w porównaniu do danych bez przeskalowania:")
-        print(best_features, min_error * (range_minmax ** 2))
