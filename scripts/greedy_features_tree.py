@@ -16,7 +16,7 @@ def find_best_features(df: pd.DataFrame, dec_attr: str, is_standarized = False, 
         errors = [0] * (n-j)
         for i, value in enumerate(features):
             tmp_features.append(value)
-            result = cross_validate(DecisionTreeRegressor(), df[tmp_features].values, df[dec_attr].values, cv = 5, scoring = 'neg_mean_squared_error')
+            result = cross_validate(DecisionTreeRegressor(random_state=42), df[tmp_features].values, df[dec_attr].values, cv = 5, scoring = 'neg_mean_squared_error')
             errors[i] = np.mean(-result['test_score'])
             tmp_features.remove(value)
         idx = np.argmin(errors)
